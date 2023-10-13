@@ -1,6 +1,7 @@
 package com.betrybe.agrix.ebytr.staff.entity;
 
 
+import com.betrybe.agrix.ebytr.staff.dto.PersonDto;
 import com.betrybe.agrix.ebytr.staff.security.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +28,10 @@ public class Person {
   private Role role;
 
   public Person() {
+  }
+
+  public PersonDto toDto() {
+    return new PersonDto(id, username, role);
   }
 
   public Long getId() {
