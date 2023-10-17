@@ -9,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
  * Class representing a person.
  */
 @Entity
-@Table(name = "persons")
 public class Person implements UserDetails, GrantedAuthority {
 
   @Id
@@ -30,16 +28,6 @@ public class Person implements UserDetails, GrantedAuthority {
   private String username;
   private String password;
   private Role role;
-
-  public Person() {
-  }
-
-  /** Person constructor. */
-  public Person(String username, String password, Role role) {
-    this.username = username;
-    this.password = password;
-    this.role = role;
-  }
 
   public PersonDto toDto() {
     return new PersonDto(id, username, role);

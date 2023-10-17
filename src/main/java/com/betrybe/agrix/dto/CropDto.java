@@ -11,10 +11,4 @@ public record CropDto(
         Double plantedArea,
         LocalDate plantedDate,
         LocalDate harvestDate
-) {
-
-  /** Crop constructor. */
-  public Crop toCrop() {
-    return new Crop(name, plantedArea, plantedDate, harvestDate);
-  }
-}
+) {}
