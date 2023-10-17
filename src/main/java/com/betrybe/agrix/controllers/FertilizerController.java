@@ -5,6 +5,7 @@ import com.betrybe.agrix.services.FertilizerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ public class FertilizerController {
 
   @GetMapping("/fertilizers")
   @ResponseStatus(HttpStatus.OK)
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public List<Fertilizer> getAllFertilizers() {
     return fertilizerService.getAllFertilizers();
   }
@@ -28,6 +30,12 @@ public class FertilizerController {
   @ResponseStatus(HttpStatus.OK)
   public Fertilizer getFertilizerById(@PathVariable Long id) {
     return fertilizerService.getFertilizerById(id);
+  }
+
+  @GetMapping("/crops/{cropId}/fertilizers")
+  @ResponseStatus(HttpStatus.OK)
+  public List<Fertilizer> getFertilizersByCropId(@PathVariable Long cropId) {
+    return fertilizerService.getFertilizersByCropId(cropId);
   }
 
   @PostMapping("/fertilizers")
@@ -44,11 +52,5 @@ public class FertilizerController {
   ) {
     fertilizerService.addFertilizerToCrop(cropId, fertilizerId);
     return "Fertilizante e plantação associados com sucesso!";
-  }
-
-  @GetMapping("/crops/{cropId}/fertilizers")
-  @ResponseStatus(HttpStatus.OK)
-  public List<Fertilizer> getFertilizersByCropId(@PathVariable Long cropId) {
-    return fertilizerService.getFertilizersByCropId(cropId);
   }
 }
