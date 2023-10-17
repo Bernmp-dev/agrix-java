@@ -31,9 +31,10 @@ public class PersonService implements UserDetailsService {
 
   /** Returns a person for a given username.  */
   @Override
-  public UserDetails loadUserByUsername(String username)
-      throws UsernameNotFoundException {
-
-    return personRepository.findByUsername(username);
+  public UserDetails loadUserByUsername(String username) {
+    return personRepository.findByUsername(username)
+      .orElseThrow(() -> new UsernameNotFoundException(
+        "Usuário não encontrado com o username: " + username
+      ));
   }
 }
