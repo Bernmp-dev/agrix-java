@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,16 +23,11 @@ public class CropController {
   @Autowired
   private CropService cropService;
 
-  @PostMapping("/farms/{farmId}/crops")
-  @ResponseStatus(HttpStatus.CREATED)
-  public CropDto createCrop(@PathVariable Long farmId, @RequestBody Crop crop) {
-    return cropService.createCrop(farmId, crop);
-  }
-
-  @GetMapping("/farms/{farmId}/crops")
+  @GetMapping("/crops")
   @ResponseStatus(HttpStatus.OK)
-  public Iterable<CropDto> getAllCropsByFarmId(@PathVariable Long farmId) {
-    return cropService.getAllCropsByFarmId(farmId);
+  @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+  public Iterable<CropDto> getAllCrops() {
+    return cropService.getAllCrops();
   }
 
   @GetMapping("/crops/{cropId}")
@@ -40,20 +36,26 @@ public class CropController {
     return cropService.getCropById(cropId).toCropDto();
   }
 
-  @GetMapping("/crops")
+  @GetMapping("/farms/{farmId}/crops")
   @ResponseStatus(HttpStatus.OK)
-  public Iterable<CropDto> getAllCrops() {
-    return cropService.getAllCrops();
+  public Iterable<CropDto> getAllCropsByFarmId(@PathVariable Long farmId) {
+    return cropService.getAllCropsByFarmId(farmId);
   }
 
   /** Find crops by harvest date between. */
   @GetMapping("/crops/search")
   public List<CropDto> searchCrops(
-          @RequestParam("start") String startDate,
-          @RequestParam("end") String endDate
+      @RequestParam("start") String startDate,
+      @RequestParam("end") String endDate
   ) {
     LocalDate start = LocalDate.parse(startDate);
     LocalDate end = LocalDate.parse(endDate);
     return cropService.findByHarvestDateBetween(start, end);
+  }
+
+  @PostMapping("/farms/{farmId}/crops")
+  @ResponseStatus(HttpStatus.CREATED)
+  public CropDto createCrop(@PathVariable Long farmId, @RequestBody Crop crop) {
+    return cropService.createCrop(farmId, crop);
   }
 }
