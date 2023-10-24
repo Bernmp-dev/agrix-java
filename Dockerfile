@@ -5,7 +5,6 @@ COPY .mvn/ .mvn
 COPY ./src/main/ ./src/main/
 COPY mvnw pom.xml ./
 
-RUN mvn dependency:go-offline && mvn package && rm -rf /root/.m2
 FROM openjdk:11-jre-slim
 
 FROM eclipse-temurin:17-jre-jammy
