@@ -5,7 +5,8 @@ COPY .mvn/ .mvn
 COPY ./src/main/ ./src/main/
 COPY mvnw pom.xml ./
 
-FROM openjdk:11-jre-slim
+RUN ./mvnw clean package
+
 
 FROM eclipse-temurin:17-jre-jammy
 
