@@ -1,14 +1,16 @@
-FROM maven:3.6.3-jdk-11-slim AS build-image
-WORKDIR /to-build-app
-COPY pom.xml .
-COPY src/ src/
+FROM eclipse-temurin:17-jdk-jammy as build-image
+WORKDIR /app
+
+COPY .mvn/ .mvn
+COPY ./src/main/ ./src/main/
+COPY mvnw pom.xml ./
+
 RUN mvn dependency:go-offline && mvn package && rm -rf /root/.m2
 FROM openjdk:11-jre-slim
 
-FROM openjdk:11-jre-slim
-RUN addgroup appgroup && adduser -S appuser -G appgroup
-WORKDIR /app
-USER appuser
-COPY --from=build-image /to-build-app/target/*.jar ./app.jar
+FROM eclipse-temurin:17-jre-jammy
+
+COPY --from=build-image /app/target/*.jar /app/app.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
