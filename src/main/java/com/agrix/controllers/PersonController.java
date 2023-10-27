@@ -1,12 +1,13 @@
-package com.betrybe.agrix.controllers;
+package com.agrix.controllers;
 
-import com.betrybe.agrix.dto.AuthenticationDto;
-import com.betrybe.agrix.dto.PersonDto;
-import com.betrybe.agrix.dto.TokenDto;
-import com.betrybe.agrix.models.entities.Person;
-import com.betrybe.agrix.models.repositories.PersonRepository;
-import com.betrybe.agrix.services.PersonService;
-import com.betrybe.agrix.services.TokenService;
+import com.agrix.dto.AuthenticationDto;
+import com.agrix.dto.CreatePersonDto;
+import com.agrix.dto.PersonDto;
+import com.agrix.dto.TokenDto;
+import com.agrix.models.entities.Person;
+import com.agrix.models.repositories.PersonRepository;
+import com.agrix.services.PersonService;
+import com.agrix.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,7 +33,7 @@ public class PersonController {
   /** Creates a new person. */
   @PostMapping("/persons")
   @ResponseStatus(HttpStatus.CREATED)
-  public PersonDto create(@RequestBody Person person) {
+  public PersonDto create(@RequestBody CreatePersonDto person) {
     return personService.create(person);
   }
 

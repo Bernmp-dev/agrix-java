@@ -21,13 +21,13 @@ public class PersonService implements UserDetailsService {
   private PersonRepository personRepository;
 
   /** Creates a new person. */
-  public PersonDto create(Person person) {
+  public PersonDto create(CreatePersonDto createPersonDto) {
     String hashedPassword = new BCryptPasswordEncoder()
-        .encode(person.getPassword());
+        .encode(createPersonDto.password());
 
-    person.setPassword(hashedPassword);
+    Person personToSave = createPersonDto.toEntity(hashedPassword);
 
-    return personRepository.save(person).toDto();
+    return personRepository.save(personToSave).toDto();
   }
 
   /** Returns a person for a given username.  */
