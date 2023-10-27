@@ -1,5 +1,6 @@
 package com.agrix.controllers;
 
+import com.agrix.dto.FertilizerDto;
 import com.agrix.models.entities.Fertilizer;
 import com.agrix.services.FertilizerService;
 import java.util.List;
@@ -40,8 +41,8 @@ public class FertilizerController {
 
   @PostMapping("/fertilizers")
   @ResponseStatus(HttpStatus.CREATED)
-  public Fertilizer createFertilizer(@RequestBody Fertilizer fertilizer) {
-    return fertilizerService.createFertilizer(fertilizer);
+  public Fertilizer createFertilizer(@RequestBody FertilizerDto fertilizerDto) {
+    return fertilizerService.createFertilizer(fertilizerDto.toFertilizer());
   }
 
   @PostMapping("/crops/{cropId}/fertilizers/{fertilizerId}")

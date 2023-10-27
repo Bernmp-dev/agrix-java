@@ -1,7 +1,6 @@
 package com.agrix.controllers;
 
 import com.agrix.dto.CropDto;
-import com.agrix.models.entities.Crop;
 import com.agrix.services.CropService;
 import java.time.LocalDate;
 import java.util.List;
@@ -55,7 +54,7 @@ public class CropController {
 
   @PostMapping("/farms/{farmId}/crops")
   @ResponseStatus(HttpStatus.CREATED)
-  public CropDto createCrop(@PathVariable Long farmId, @RequestBody Crop crop) {
-    return cropService.createCrop(farmId, crop);
+  public CropDto createCrop(@PathVariable Long farmId, @RequestBody CropDto cropDto) {
+    return cropService.createCrop(farmId, cropDto.toEntity());
   }
 }

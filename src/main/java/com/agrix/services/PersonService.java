@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service layer class for handling persons business logic.
@@ -21,6 +22,7 @@ public class PersonService implements UserDetailsService {
   private PersonRepository personRepository;
 
   /** Creates a new person. */
+  @Transactional
   public PersonDto create(CreatePersonDto createPersonDto) {
     String hashedPassword = new BCryptPasswordEncoder()
         .encode(createPersonDto.password());

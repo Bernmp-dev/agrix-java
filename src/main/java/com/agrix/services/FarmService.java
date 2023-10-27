@@ -1,6 +1,6 @@
 package com.agrix.services;
 
-//import com.betrybe.agrix.exceptions.FarmAlreadyExistsException;
+import com.agrix.exceptions.FarmAlreadyExistsException;
 import com.agrix.exceptions.FarmNotFoundException;
 import com.agrix.models.entities.Farm;
 import com.agrix.models.repositories.FarmRepository;
@@ -16,12 +16,10 @@ public class FarmService {
 
   /** Create a farm. */
   public Farm createFarm(Farm farm) {
-
-    //    farmRepository.findAll().forEach(farm1 -> {
-    //      if (farm1.getName().equals(farm.getName())) {
-    //        throw new FarmAlreadyExistsException();
-    //      }
-    //});
+    farmRepository.findByName(farm.getName())
+      .ifPresent(existingFarm -> {
+      throw new FarmAlreadyExistsException();
+    });
 
     return farmRepository.save(farm);
   }

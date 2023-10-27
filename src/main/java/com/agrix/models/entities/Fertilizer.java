@@ -24,12 +24,8 @@ public class Fertilizer {
   @JsonIgnore
   private List<Crop> crops;
 
-  public Fertilizer() {
-  }
-
   /** Fertilizer constructor. */
-  public Fertilizer(Long id, String name, String brand, String composition) {
-    this.id = id;
+  public Fertilizer(String name, String brand, String composition) {
     this.name = name;
     this.brand = brand;
     this.composition = composition;
