@@ -3,6 +3,8 @@ package com.agrix.controllers;
 import com.agrix.dto.FarmDto;
 import com.agrix.models.entities.Farm;
 import com.agrix.services.FarmService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 /** Farm Controller. */
 @RestController
 @RequestMapping("/farms")
+@Tag(name = "Farms", description = "Farms management APIs")
 public class FarmController {
 
   @Autowired
@@ -27,25 +30,29 @@ public class FarmController {
   /** Create a farm. */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
+  @Tag(name = "Farms", description = "Farms management APIs")
   public Farm createFarm(@Valid @RequestBody FarmDto farmDto) {
     return farmService.createFarm(farmDto.toFarm());
   }
 
-  @GetMapping()
+  @GetMapping
   @ResponseStatus(HttpStatus.OK)
   @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'MANAGER')")
+  @Operation(summary = "Get all farms")
   public Iterable<Farm> getAllFarms() {
     return farmService.getAllFarms();
   }
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
+  @Operation(summary = "Get farm by id")
   public Farm getFarmById(@PathVariable Long id) {
     return farmService.getFarmById(id);
   }
 
   @DeleteMapping
   @ResponseStatus(HttpStatus.OK)
+  @Operation(summary = "Delete all farms")
   public String deleteAllFarms() {
     return farmService.deleteAllFarms();
   }
