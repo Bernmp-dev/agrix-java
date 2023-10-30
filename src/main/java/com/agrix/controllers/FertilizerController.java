@@ -4,6 +4,7 @@ import com.agrix.dto.FertilizerDto;
 import com.agrix.models.entities.Fertilizer;
 import com.agrix.services.FertilizerService;
 import java.util.List;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,7 +42,7 @@ public class FertilizerController {
 
   @PostMapping("/fertilizers")
   @ResponseStatus(HttpStatus.CREATED)
-  public Fertilizer createFertilizer(@RequestBody FertilizerDto fertilizerDto) {
+  public Fertilizer createFertilizer(@Valid @RequestBody FertilizerDto fertilizerDto) {
     return fertilizerService.createFertilizer(fertilizerDto.toFertilizer());
   }
 

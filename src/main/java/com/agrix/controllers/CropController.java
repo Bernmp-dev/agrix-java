@@ -4,6 +4,7 @@ import com.agrix.dto.CropDto;
 import com.agrix.services.CropService;
 import java.time.LocalDate;
 import java.util.List;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -54,7 +55,7 @@ public class CropController {
 
   @PostMapping("/farms/{farmId}/crops")
   @ResponseStatus(HttpStatus.CREATED)
-  public CropDto createCrop(@PathVariable Long farmId, @RequestBody CropDto cropDto) {
+  public CropDto createCrop(@PathVariable Long farmId, @Valid @RequestBody CropDto cropDto) {
     return cropService.createCrop(farmId, cropDto.toEntity());
   }
 }

@@ -8,6 +8,7 @@ import com.agrix.models.entities.Person;
 import com.agrix.models.repositories.PersonRepository;
 import com.agrix.services.PersonService;
 import com.agrix.services.TokenService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,7 +34,7 @@ public class PersonController {
   /** Creates a new person. */
   @PostMapping("/persons")
   @ResponseStatus(HttpStatus.CREATED)
-  public PersonDto create(@RequestBody CreatePersonDto person) {
+  public PersonDto create(@Valid @RequestBody CreatePersonDto person) {
     return personService.create(person);
   }
 

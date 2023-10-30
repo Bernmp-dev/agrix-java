@@ -3,6 +3,7 @@ package com.agrix.controllers;
 import com.agrix.dto.FarmDto;
 import com.agrix.models.entities.Farm;
 import com.agrix.services.FarmService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +27,7 @@ public class FarmController {
   /** Create a farm. */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Farm createFarm(@RequestBody FarmDto farmDto) {
+  public Farm createFarm(@Valid @RequestBody FarmDto farmDto) {
     return farmService.createFarm(farmDto.toFarm());
   }
 
