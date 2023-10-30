@@ -1,27 +1,17 @@
 package com.agrix.dto;
 
 import com.agrix.models.entities.Fertilizer;
+import jakarta.validation.constraints.NotBlank;
 
 /** Fertilizer Data Tranfer Object. */
-public record FertilizerDto(String name, String brand, String composition) {
-
-  /**
-   * Constructor and validation for FertilizerDto.
-   * @param name Fertilizer name.
-   * @param brand Fertilizer brand.
-   * @param composition Fertilizer composition.
-   */
-  public FertilizerDto {
-    if (name == null || name.isBlank()) {
-      throw new IllegalArgumentException("Nome não pode ser nulo ou vazio!");
-    }
-    if (brand == null || brand.isBlank()) {
-      throw new IllegalArgumentException("Marca não pode ser nula ou vazia!");
-    }
-    if (composition == null || composition.isBlank()) {
-      throw new IllegalArgumentException("Composição não pode ser nula ou vazia!");
-    }
-  }
+public record FertilizerDto(
+  @NotBlank(message = "Nome não pode ser nulo ou vazio!")
+  String name,
+  @NotBlank(message = "Marca não pode ser nula ou vazia!")
+  String brand,
+  @NotBlank(message = "Composição não pode ser nula ou vazia!")
+  String composition
+) {
 
   /** Convert to Fertilizer Entity. */
   public Fertilizer toFertilizer() {

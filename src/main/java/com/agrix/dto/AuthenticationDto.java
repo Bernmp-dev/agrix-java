@@ -1,19 +1,11 @@
 package com.agrix.dto;
 
-/** DTO class for authentication. */
-public record AuthenticationDto(String username, String password){
+import jakarta.validation.constraints.NotBlank;
 
-  /**
-   * Constructor and validation for AuthenticationDto.
-   * @param username Username.
-   * @param password Password.
-   */
-  public AuthenticationDto {
-    if (username == null || username.isBlank()) {
-      throw new IllegalArgumentException("Username não pode ser nulo ou vazio!");
-    }
-    if (password == null || password.isBlank()) {
-      throw new IllegalArgumentException("Password não pode ser nulo ou vazio!");
-    }
-  }
-}
+/** DTO class for authentication. */
+public record AuthenticationDto(
+  @NotBlank(message = "Username não pode ser nulo ou vazio!")
+  String username,
+  @NotBlank(message = "Password não pode ser nulo ou vazio!")
+  String password
+){}

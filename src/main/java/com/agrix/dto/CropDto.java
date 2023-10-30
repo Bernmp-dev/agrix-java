@@ -2,40 +2,26 @@ package com.agrix.dto;
 
 import com.agrix.models.entities.Crop;
 import java.time.LocalDate;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 /** Crop Data Tranfer Object. */
 public record CropDto(
         Long id,
         Long farmId,
+        @NotBlank(message = "Nome não pode ser nulo ou vazio!")
         String name,
+        @Min(value = 0, message = "Área plantada não pode ser nula ou menor que 0!")
         Double plantedArea,
+        @NotNull(message = "Data de plantio não pode ser nula!")
+        @PastOrPresent(message = "Data de plantio não pode ser no futuro!")
         LocalDate plantedDate,
+        @NotNull(message = "Data de colheita não pode ser nula!")
+        @PastOrPresent(message = "Data de colheita não pode ser no futuro!")
         LocalDate harvestDate
 ) {
-
-  /**
-   * Constructor and validation for CropDto.
-   * @param id Crop id.
-   * @param farmId Farm id.
-   * @param name Crop name.
-   * @param plantedArea Planted area.
-   * @param plantedDate Planted date.
-   * @param harvestDate Harvest date.
-   */
-  public CropDto {
-    if (name == null || name.isBlank()) {
-      throw new IllegalArgumentException("Nome não pode ser nulo ou vazio!");
-    }
-    if (plantedArea == null || plantedArea <= 0) {
-      throw new IllegalArgumentException("Área plantada não pode ser nula ou menor que 0!");
-    }
-    if (plantedDate == null) {
-      throw new IllegalArgumentException("Data de plantio não pode ser nula!");
-    }
-    if (harvestDate == null) {
-      throw new IllegalArgumentException("Data de colheita não pode ser nula!");
-    }
-  }
 
   /**
    * Converts CropDto to Crop entity.
