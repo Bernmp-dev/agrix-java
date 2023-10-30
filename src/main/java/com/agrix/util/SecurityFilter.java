@@ -17,14 +17,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /** Filter layer class for handling security. */
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
-  private final TokenService tokenService;
-  private final PersonService personService;
-
   @Autowired
-  public SecurityFilter(TokenService tokenService, PersonService personService) {
-    this.tokenService = tokenService;
-    this.personService = personService;
-  }
+  private TokenService tokenService;
+  @Autowired
+  private PersonService personService;
 
   @Override
   protected void doFilterInternal(

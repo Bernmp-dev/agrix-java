@@ -20,20 +20,19 @@ public class PersonService implements UserDetailsService {
 
   @Autowired
   private PersonRepository personRepository;
-  @Autowired
-  private BCryptPasswordEncoder passwordEncoder;
 
   /** Creates a new person. */
   @Transactional
   public PersonDto create(CreatePersonDto createPersonDto) {
-    if (personRepository
-      .findByUsername(createPersonDto.username())
-      .isPresent()) {
+    if (personRepository.findByUsername(
+      createPersonDto.username()).isPresent()
+    ) {
       throw new IllegalArgumentException("Username já existe!");
     }
 
-    String hashedPassword = passwordEncoder
-      .encode(createPersonDto.password());
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    String hashedPassword = passwordEncoder.encode(createPersonDto.password());
 
     Person personToSave = createPersonDto.toEntity(hashedPassword);
     return personRepository.save(personToSave).toDto();
