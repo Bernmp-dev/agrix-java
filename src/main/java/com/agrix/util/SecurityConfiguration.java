@@ -42,8 +42,7 @@ public class SecurityConfiguration {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(authorize -> authorize
           .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-          .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-          .requestMatchers(HttpMethod.POST, "/persons").permitAll()
+          .requestMatchers(HttpMethod.POST, "/user/**").permitAll()
           .anyRequest().authenticated())
           .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
           .build();
@@ -58,28 +57,5 @@ public class SecurityConfiguration {
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
-  }
-
-  private SecurityScheme createApiKeyScheme() {
-    return new SecurityScheme().type(SecurityScheme.Type.HTTP)
-      .bearerFormat("JWT")
-      .scheme("bearer");
-  }
-
-  /** OpenAPI configuration. */
-  @Bean
-  public OpenAPI openApi() {
-    return new OpenAPI().addSecurityItem(new SecurityRequirement()
-      .addList("Bearer Authentication"))
-      .components(new Components()
-        .addSecuritySchemes("Bearer Authentication", createApiKeyScheme()))
-      .info(new Info().title("AGRIX REST API")
-      .description("Essa é uma solução em Spring Boot para o setor agrícola, "
-        + "focando em eficiência e sustentabilidade. Implementei APIs RESTful "
-        + "para gerenciamento de fazendas e plantações, utilizei Spring Data JPA "
-        + "para persistência de dados e gerenciamento de erros com Spring Web. "
-        + "A aplicação foi empacotada em um ambiente Docker para fácil distribuição e implantação.")
-      .version("1.0")
-      .contact(new Contact().name("Bernardo").email("bernardomp.dev@gmail.com")));
   }
 }
