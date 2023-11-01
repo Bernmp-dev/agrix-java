@@ -7,6 +7,7 @@ import com.agrix.models.entities.Crop;
 import com.agrix.models.entities.Farm;
 import java.time.LocalDate;
 import java.util.List;
+import com.agrix.models.repositories.FarmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,35 +39,54 @@ public class CropService {
 
   /** Get crop by id. */
   public Crop getCropById(Long id) {
-    return cropRepository.findById(id)
-        .orElseThrow(CropNotFoundException::new);
+    return cropRepository
+      .findById(id)
+      .orElseThrow(CropNotFoundException::new);
   }
 
   /** Delete a crop. */
-  public Iterable<CropDto> getAllCrops() {
-    return cropRepository
-        .findAll()
-        .stream()
-        .map(Crop::toCropDto)
-        .toList();
+  public List<CropDto> getAllCrops() {
+    List<CropDto> cropDtos = cropRepository
+      .findAll()
+      .stream()
+      .map(Crop::toCropDto)
+      .toList();
+
+    if (cropDtos.isEmpty()) {
+      throw new CropNotFoundException();
+    }
+
+    return cropDtos;
   }
 
   /** Delete all crops. */
   public Iterable<CropDto> getAllCropsByFarmId(Long farmId) {
-    return farmService
-        .getFarmById(farmId)
-        .getCrops()
-        .stream()
-        .map(Crop::toCropDto)
-        .toList();
+    List<CropDto> cropDtos = farmService
+      .getFarmById(farmId)
+      .getCrops()
+      .stream()
+      .map(Crop::toCropDto)
+      .toList();
+
+    if (cropDtos.isEmpty()) {
+      throw new CropNotFoundException();
+    }
+
+    return cropDtos;
   }
 
   /** Find crops by harvest date between. */
   public List<CropDto> findByHarvestDateBetween(LocalDate start, LocalDate end) {
-    return cropRepository
-            .findByHarvestDateBetween(start, end)
-            .stream()
-            .map(Crop::toCropDto)
-            .toList();
+    List<CropDto> cropDtos = cropRepository
+      .findByHarvestDateBetween(start, end)
+      .stream()
+      .map(Crop::toCropDto)
+      .toList();
+
+    if (cropDtos.isEmpty()) {
+      throw new CropNotFoundException();
+    }
+
+    return cropDtos;
   }
 }
