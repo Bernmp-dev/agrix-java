@@ -16,18 +16,25 @@ import org.springframework.transaction.annotation.Transactional;
 public class CropService {
 
   @Autowired
+  private FarmRepository farmRepository;
+  @Autowired
   private CropRepository cropRepository;
   @Autowired
   private FarmService farmService;
 
-  /** Create a crop. */
-  @Transactional
-  public CropDto createCrop(Long farmId, Crop crop) {
-    Farm farm = farmService.getFarmById(farmId);
-    crop.setFarm(farm);
+    /** Create a crop. */
+    @Transactional
+    public CropDto createCrop(Long farmId, Crop crop) {
+      Farm farm = farmService.getFarmById(farmId);
+      crop.setFarm(farm);
+      farm.addCrop(crop);
 
-    return cropRepository.save(crop).toCropDto();
-  }
+      farmRepository.save(farm);  // Salva a Farm, que também salva a Crop devido à cascata
+
+      return cropRepository
+        .findFirstByOrderByIdDesc()
+        .toCropDto();
+    }
 
   /** Get crop by id. */
   public Crop getCropById(Long id) {
