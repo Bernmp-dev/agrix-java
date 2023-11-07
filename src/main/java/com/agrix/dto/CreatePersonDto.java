@@ -4,18 +4,15 @@ import com.agrix.models.entities.Person;
 import com.agrix.security.Role;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record CreatePersonDto(
   @NotBlank(message = "Username não pode ser nulo ou vazio!")
-  @Schema(description = "Username", example = "newuser")
+  @Schema(description = "username", example = "novo_usuario")
   String username,
   @NotBlank(message = "Password não pode ser nulo ou vazio!")
-  @Schema(description = "Password", example = "12345")
+  @Schema(description = "password", example = "senha_segura")
   String password,
-
-  @NotNull(message = "Role não pode ser nulo!")
-  @Schema(description = "Role", example = "ADMIN")
+  @Schema(description = "role", example = "ADMIN")
   Role role
 ) {
 

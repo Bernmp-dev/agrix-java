@@ -11,9 +11,9 @@ import jakarta.validation.constraints.PastOrPresent;
 
 /** Crop Data Tranfer Object. */
 public record CropDto(
-        @Schema (description = "Crop's id", example = "1")
+        @Schema(accessMode = Schema.AccessMode.READ_ONLY, description = "Crop's id", example = "1")
         Long id,
-        @Schema(description = "Crop's farm id", example = "1")
+        @Schema(accessMode = Schema.AccessMode.READ_ONLY, description = "Crop's farm id", example = "1")
         Long farmId,
         @NotBlank(message = "Nome não pode ser nulo ou vazio!")
         @Schema(description = "Crop's name", example = "Soja")

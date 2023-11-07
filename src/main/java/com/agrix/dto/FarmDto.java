@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 
 /** Farm Data Tranfer Object. */
 public record FarmDto(
+  @Schema(description = "Farm's id", example = "1")
+  Long id,
   @NotBlank(message = "Nome não pode ser nulo ou vazio!")
   @Schema(description = "Farm's name", example = "Fazenda do João")
   String name,
