@@ -15,9 +15,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @RestController
 @RequestMapping(
-  value = "/crops",
-  produces = "application/json",
-  consumes = "application/json"
+  value = "/crops"
 )
 @Tag(
   name = "Crops",
