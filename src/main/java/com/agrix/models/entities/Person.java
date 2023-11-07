@@ -29,6 +29,15 @@ public class Person implements UserDetails, GrantedAuthority {
   private String password;
   private Role role;
 
+  public Person() {
+  }
+
+  public Person(String username, String password, Role role) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
+  }
+
   public PersonDto toDto() {
     return new PersonDto(id, username, role);
   }

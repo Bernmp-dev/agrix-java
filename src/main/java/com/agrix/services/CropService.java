@@ -60,7 +60,7 @@ public class CropService {
   }
 
   /** Delete all crops. */
-  public Iterable<CropDto> getAllCropsByFarmId(Long farmId) {
+  public List<CropDto> getAllCropsByFarmId(Long farmId) {
     List<CropDto> cropDtos = farmService
       .getFarmById(farmId)
       .getCrops()

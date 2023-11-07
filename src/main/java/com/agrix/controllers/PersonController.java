@@ -8,6 +8,7 @@ import com.agrix.models.entities.Person;
 import com.agrix.models.repositories.PersonRepository;
 import com.agrix.services.PersonService;
 import com.agrix.services.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class PersonController {
   /** Creates a new person. */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
+  @Operation(summary = "Register a new user")
   public PersonDto create(@Valid @RequestBody CreatePersonDto person) {
     return personService.create(person);
   }
@@ -41,6 +43,7 @@ public class PersonController {
   /** Returns a person for a given username. */
   @PostMapping("/login")
   @ResponseStatus(HttpStatus.OK)
+  @Operation(summary = "User login validation")
   public TokenDto login(
       @RequestBody AuthenticationDto authenticationDto
   ) {
@@ -55,5 +58,13 @@ public class PersonController {
     Person person = (Person) auth.getPrincipal();
 
     return new TokenDto(tokenService.generateToken(person));
+  }
+
+  /** Returns all users. */
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
+  @Operation(summary = "Get all users")
+  public Iterable<Person> getAllUsers() {
+    return personRepository.findAll();
   }
 }
