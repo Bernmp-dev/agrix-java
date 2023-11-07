@@ -1,7 +1,10 @@
 package com.agrix.models.entities;
 
+import com.agrix.dto.FarmDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,7 +22,9 @@ public class Farm {
   private Long id;
   private String name;
   private Double size;
-  @OneToMany(mappedBy = "farm")
+  @OneToMany(mappedBy = "farm",
+    fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL)
   @JsonIgnore
   private List<Crop> crops;
 
@@ -30,6 +35,10 @@ public class Farm {
   public Farm(String name, Double size) {
     this.name = name;
     this.size = size;
+  }
+
+  public FarmDto toFarmDto() {
+    return new FarmDto(id, name, size);
   }
 
   public Long getId() {
@@ -58,6 +67,10 @@ public class Farm {
 
   public List<Crop> getCrops() {
     return crops;
+  }
+
+  public void addCrop(Crop crop) {
+    this.crops.add(crop);
   }
 
   public void setCrops(List<Crop> crops) {
