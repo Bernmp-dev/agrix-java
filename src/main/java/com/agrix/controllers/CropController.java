@@ -8,9 +8,9 @@ import com.agrix.controllers.annotations.crop.GetCropByIdConfig;
 import com.agrix.controllers.annotations.crop.SearchCropsConfig;
 import com.agrix.dto.CropDto;
 import com.agrix.services.CropService;
+import jakarta.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +28,8 @@ public class CropController {
   @PostMapping("/farm/{farmId}")
   @CreateCropConfig
   public CropDto createCrop(
-    @PathVariable Long farmId,
-    @Valid @RequestBody CropDto cropDto
+      @PathVariable Long farmId,
+      @Valid @RequestBody CropDto cropDto
   ) {
     return cropService.createCrop(farmId, cropDto.toEntity());
   }

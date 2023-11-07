@@ -25,7 +25,7 @@ public class PersonService implements UserDetailsService {
   @Transactional
   public PersonDto create(CreatePersonDto createPersonDto) {
     if (personRepository.findByUsername(
-      createPersonDto.username()).isPresent()
+        createPersonDto.username()).isPresent()
     ) {
       throw new IllegalArgumentException("Username já existe!");
     }

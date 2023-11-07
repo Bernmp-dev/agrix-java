@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
  * Open Api configuration class.
  */
 @OpenAPIDefinition(
-  info = @Info(
+    info = @Info(
     title = "Agrix API - bernmp-dev",
     version = "1.0",
     description = "Open Api documentation for a farm management system.",
@@ -23,22 +23,22 @@ import io.swagger.v3.oas.annotations.servers.Server;
       email = "bernardomp.dev@gmail.com",
       url = "www.github.com/bernmp-dev"
     )
-  ),
-  servers = {
-    @Server(
-    description = "Localhost",
-    url = "http://localhost:8080"
-  )
-  },
-  security = @SecurityRequirement(name = "Bearer Authentication")
+    ),
+    servers = {
+        @Server(
+        description = "Localhost",
+        url = "http://localhost:8080"
+        )
+    },
+    security = @SecurityRequirement(name = "Bearer Authentication")
 )
 @SecurityScheme(
-  name = "Bearer Authentication",
-  description = "JWT token",
-  scheme = "bearer",
-  type = SecuritySchemeType.HTTP,
-  in = SecuritySchemeIn.HEADER,
-  bearerFormat = "JWT"
+    name = "Bearer Authentication",
+    description = "JWT token",
+    scheme = "bearer",
+    type = SecuritySchemeType.HTTP,
+    in = SecuritySchemeIn.HEADER,
+    bearerFormat = "JWT"
 )
 public class OpenApiConfig {
 }

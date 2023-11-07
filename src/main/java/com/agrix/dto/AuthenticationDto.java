@@ -5,10 +5,10 @@ import jakarta.validation.constraints.NotBlank;
 
 /** DTO class for authentication. */
 public record AuthenticationDto(
-  @NotBlank(message = "Username não pode ser nulo ou vazio!")
-  @Schema(description = "username", example = "novo_usuario")
-  String username,
-  @NotBlank(message = "Password não pode ser nulo ou vazio!")
-  @Schema(description = "password", example = "senha_segura")
-  String password
+    @NotBlank(message = "Username não pode ser nulo ou vazio!")
+    @Schema(description = "username", example = "novo_usuario")
+    String username,
+    @NotBlank(message = "Password não pode ser nulo ou vazio!")
+    @Schema(description = "password", example = "senha_segura")
+    String password
 ){}

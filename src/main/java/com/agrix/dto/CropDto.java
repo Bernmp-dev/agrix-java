@@ -1,19 +1,23 @@
 package com.agrix.dto;
 
 import com.agrix.models.entities.Crop;
-import java.time.LocalDate;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import java.time.LocalDate;
+
 
 /** Crop Data Tranfer Object. */
 public record CropDto(
         @Schema(accessMode = Schema.AccessMode.READ_ONLY, description = "Crop's id", example = "1")
         Long id,
-        @Schema(accessMode = Schema.AccessMode.READ_ONLY, description = "Crop's farm id", example = "1")
+        @Schema(
+          accessMode = Schema.AccessMode.READ_ONLY,
+          description = "Crop's farm id",
+          example = "1"
+        )
         Long farmId,
         @NotBlank(message = "Nome não pode ser nulo ou vazio!")
         @Schema(description = "Crop's name", example = "Soja")
@@ -33,6 +37,7 @@ public record CropDto(
 
   /**
    * Converts CropDto to Crop entity.
+
    * @return Crop entity.
    */
   public Crop toEntity() {

@@ -1,18 +1,21 @@
 package com.agrix.controllers;
 
-import com.agrix.controllers.annotations.farm.*;
+import com.agrix.controllers.annotations.farm.CreateFarmConfig;
+import com.agrix.controllers.annotations.farm.DeleteAllFarmsConfig;
+import com.agrix.controllers.annotations.farm.FarmControllerConfig;
+import com.agrix.controllers.annotations.farm.GetAllFarmsConfig;
+import com.agrix.controllers.annotations.farm.GetFarmByIdConfig;
 import com.agrix.dto.FarmDto;
 import com.agrix.models.entities.Farm;
 import com.agrix.services.FarmService;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 /** Farm Controller. */
 @FarmControllerConfig

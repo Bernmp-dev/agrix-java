@@ -22,9 +22,11 @@ public class Farm {
   private Long id;
   private String name;
   private Double size;
-  @OneToMany(mappedBy = "farm",
-    fetch = FetchType.EAGER,
-    cascade = CascadeType.ALL)
+  @OneToMany(
+      mappedBy = "farm",
+      fetch = FetchType.EAGER,
+      cascade = CascadeType.ALL
+  )
   @JsonIgnore
   private List<Crop> crops;
 

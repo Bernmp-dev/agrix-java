@@ -1,8 +1,8 @@
 package com.agrix.services;
 
+import com.agrix.models.entities.Person;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.agrix.models.entities.Person;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

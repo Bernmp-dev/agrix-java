@@ -5,17 +5,17 @@ import com.agrix.models.entities.Crop;
 import com.agrix.models.entities.Farm;
 import com.agrix.models.entities.Person;
 import com.agrix.models.repositories.FarmRepository;
-import java.util.ArrayList;
-import java.util.List;
 import com.agrix.models.repositories.PersonRepository;
 import com.agrix.security.Role;
 import com.agrix.services.TokenService;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.LocalDate;
 
 /** Database Seeder. */
 @Component
@@ -42,7 +42,8 @@ public class DatabaseSeeder implements CommandLineRunner {
     List<Person> people = new ArrayList<>();
 
     Person admin = new Person("admin", passwordEncoder.encode("admin"), Role.ADMIN);
-    TokenDto tokenDto = new TokenDto(tokenService.generateToken(admin));
+    TokenDto tokenDto;
+    tokenDto = new TokenDto(tokenService.generateToken(admin));
 
     people.add(admin);
     people.add(new Person("user", passwordEncoder.encode("user"), Role.USER));
@@ -66,18 +67,34 @@ public class DatabaseSeeder implements CommandLineRunner {
   }
 
   private void seedCrops() {
-    List<Farm> farms = farmRepository.findAll();
+    List<Farm> farms;
+    farms = farmRepository.findAll();
 
     List<Crop> crops = new ArrayList<>();
 
-    crops.add(new Crop("Corn", 100.0, LocalDate.parse("2022-03-01"), LocalDate.parse("2022-10-01")));
-    crops.add(new Crop("Wheat", 80.0, LocalDate.parse("2022-05-15"), LocalDate.parse("2022-09-15")));
-    crops.add(new Crop("Soybean", 70.0, LocalDate.parse("2022-04-01"), LocalDate.parse("2022-11-01")));
-    crops.add(new Crop("Rice", 60.0, LocalDate.parse("2022-04-15"), LocalDate.parse("2022-10-15")));
-    crops.add(new Crop("Barley", 90.0, LocalDate.parse("2022-05-01"), LocalDate.parse("2022-10-01")));
-    crops.add(new Crop("Oats", 95.0, LocalDate.parse("2022-03-15"), LocalDate.parse("2022-09-15")));
-    crops.add(new Crop("Rye", 50.0, LocalDate.parse("2022-04-01"), LocalDate.parse("2022-09-01")));
-    crops.add(new Crop("Sorghum", 40.0, LocalDate.parse("2022-06-01"), LocalDate.parse("2022-11-01")));
+    crops.add(new Crop("Corn", 100.0,
+        LocalDate.parse("2022-03-01"), LocalDate.parse("2022-10-01")));
+
+    crops.add(new Crop("Wheat", 80.0,
+        LocalDate.parse("2022-05-15"), LocalDate.parse("2022-09-15")));
+
+    crops.add(new Crop("Soybean", 70.0,
+        LocalDate.parse("2022-04-01"), LocalDate.parse("2022-11-01")));
+
+    crops.add(new Crop("Rice", 60.0,
+        LocalDate.parse("2022-04-15"), LocalDate.parse("2022-10-15")));
+
+    crops.add(new Crop("Barley", 90.0,
+        LocalDate.parse("2022-05-01"), LocalDate.parse("2022-10-01")));
+
+    crops.add(new Crop("Oats", 95.0,
+        LocalDate.parse("2022-03-15"), LocalDate.parse("2022-09-15")));
+
+    crops.add(new Crop("Rye", 50.0,
+        LocalDate.parse("2022-04-01"), LocalDate.parse("2022-09-01")));
+
+    crops.add(new Crop("Sorghum", 40.0,
+        LocalDate.parse("2022-06-01"), LocalDate.parse("2022-11-01")));
 
     crops.get(0).setFarm(farms.get(0));
     crops.get(1).setFarm(farms.get(0));
