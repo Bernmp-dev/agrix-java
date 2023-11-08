@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
     servers = {
         @Server(
         description = "Localhost",
-        url = "http://localhost:8080"
+        url = "https://harvesthub.fly.dev"
         )
     },
     security = @SecurityRequirement(name = "Bearer Authentication")
