@@ -10,11 +10,11 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>com.betrybe</groupId>
-  <artifactId>agrix</artifactId>
+  <groupId>com.harvestHub</groupId>
+  <artifactId>harvestHub</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>agrix</name>
-  <description>Agrix</description>
+  <name>harvestHub</name>
+  <description>harvestHub</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -212,7 +212,7 @@
             <usePhrasedClassNameInTestCaseSummary>true</usePhrasedClassNameInTestCaseSummary>
           </statelessTestsetInfoReporter>
           <includes>
-            <include>com/betrybe/agrix/evaluation/**/*Test.java</include>
+            <include>com/harvestHub/evaluation/**/*Test.java</include>
           </includes>
         </configuration>
       </plugin>
@@ -221,7 +221,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.agrix.AgrixApplication</mainClass>
+          <mainClass>com.harvesthub.HarvestHubApplication</mainClass>
           <layout>JAR</layout>
         </configuration>
       </plugin>

@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   mysql:
-    container_name: agrix-mysql
+    container_name: harvestHub-mysql
     image: mysql:8.0.32
     restart: always
     ports:
@@ -12,12 +12,12 @@ services:
       - "3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: agrixdb
+      MYSQL_DATABASE: harvestHub
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 30s
       timeout: 10s
       retries: 3
     labels:
-      description: "O serviço MySQL para o aplicativo Agrix"
+      description: "O serviço MySQL para o aplicativo harvestHub"
       version: "8.0.32"
